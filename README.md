@@ -1,6 +1,6 @@
 # ESP32-Pico-Pill
 
-![[ESP32-Pico-Pill/68ed847eb1d24e53bdfdf8d173fe9bbe_Trim.gif at main · jiangotto/ESP32-Pico-Pill (github.com)](https://github.com/jiangotto/ESP32-Pico-Pill/blob/main/0.Documents/image/68ed847eb1d24e53bdfdf8d173fe9bbe_Trim.gif))
+![image](https://github.com/jiangotto/ESP32-Pico-Pill/blob/main/0.Documents/image/68ed847eb1d24e53bdfdf8d173fe9bbe_Trim.gif)
 
 Loading...
 
