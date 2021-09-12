@@ -1,0 +1,6 @@
+[submodule "2.Software/ESP32_Pico_Pill/components/lvgl"]
+	path = 2.Software/ESP32_Pico_Pill/components/lvgl
+	url = https://github.com/lvgl/lvgl.git
+[submodule "2.Software/ESP32_Pico_Pill/components/lvgl_esp32_drivers"]
+	path = 2.Software/ESP32_Pico_Pill/components/lvgl_esp32_drivers
+	url = https://github.com/lvgl/lvgl_esp32_drivers.git
