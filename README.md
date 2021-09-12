@@ -1,2 +1,9 @@
 # ESP32-Pico-Pill
- 
+
+![68ed847eb1d24e53bdfdf8d173fe9bbe_Trim](C:\Users\jiang\Desktop\68ed847eb1d24e53bdfdf8d173fe9bbe_Trim.gif)
+
+Loading...
+
+Hacking it...
+
+Please wait...
