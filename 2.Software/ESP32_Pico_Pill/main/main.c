@@ -32,7 +32,7 @@ void flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * col
         color[i] = (color_p[i].full>>8) + (color_p[i].full<<8);
     LCD_lvgl_cb(area->x1, area->x2, area->y1, area->y2, color, size);
     free(color);
-
+ 
     /* IMPORTANT!!!
      * Inform the graphics library that you are ready with the flushing*/
     lv_disp_flush_ready(disp_drv);
@@ -132,7 +132,7 @@ static void lvgl_application(void)
     //  * 0, 0 at the end means an x, y offset after alignment*/
     // lv_obj_align(label2, LV_ALIGN_CENTER, 0, 100);
 
-     /*Create a spinner*/
+    /*Create a spinner*/
     lv_obj_t * spinner = lv_spinner_create(lv_scr_act(), 1000, 60);
     lv_obj_set_size(spinner, 100, 100);
     lv_obj_center(spinner);
