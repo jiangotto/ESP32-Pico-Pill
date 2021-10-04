@@ -1,0 +1,62 @@
+Net Status Report
+Filename     : D:\GitHub\ESP32-Pico-Pill\1.Hardware\ESP32-Pico-Pill\ESP32-Pico-Pill.PcbDoc
+Date         : 2021/9/20
+Time         : 23:52:52
+Time Elapsed : 00:00:00
+
+Nets, Layer, Length
+    3V3A, Signal Layers Only, 1946.873mils
+    CP_Rx, Signal Layers Only, 1062.295mils
+    CP_Tx, Signal Layers Only, 865.45mils
+    DTR, Signal Layers Only, 249.043mils
+    EN, Signal Layers Only, 1197.807mils
+    FLASH_CLK, Signal Layers Only, 0mils
+    FLASH_CS, Signal Layers Only, 0mils
+    FLASH_SD0, Signal Layers Only, 0mils
+    FLASH_SD1, Signal Layers Only, 0mils
+    FLASH_SD2, Signal Layers Only, 0mils
+    FLASH_SD3, Signal Layers Only, 0mils
+    GND, Signal Layers Only, 196mils
+    GPIO0, Signal Layers Only, 320.326mils
+    GPIO10, Signal Layers Only, 0mils
+    GPIO12, Signal Layers Only, 253.763mils
+    GPIO13, Signal Layers Only, 213.985mils
+    GPIO14, Signal Layers Only, 297.594mils
+    GPIO15, Signal Layers Only, 474.688mils
+    GPIO18, Signal Layers Only, 0mils
+    GPIO19, Signal Layers Only, 1424.229mils
+    GPIO2, Signal Layers Only, 0mils
+    GPIO21, Signal Layers Only, 918.133mils
+    GPIO22, Signal Layers Only, 542.27mils
+    GPIO23, Signal Layers Only, 255.977mils
+    GPIO25, Signal Layers Only, 406.394mils
+    GPIO26, Signal Layers Only, 453.367mils
+    GPIO27, Signal Layers Only, 0mils
+    GPIO32, Signal Layers Only, 0mils
+    GPIO33, Signal Layers Only, 0mils
+    GPIO34, Signal Layers Only, 0mils
+    GPIO35, Signal Layers Only, 0mils
+    GPIO37, Signal Layers Only, 0mils
+    GPIO38, Signal Layers Only, 0mils
+    GPIO4, Signal Layers Only, 0mils
+    GPIO5, Signal Layers Only, 0mils
+    GPIO9, Signal Layers Only, 0mils
+    LEDK, Signal Layers Only, 543.994mils
+    NetA1_1, Signal Layers Only, 465.667mils
+    NetC6_1, Signal Layers Only, 76.265mils
+    NetR10_2, Signal Layers Only, 133.74mils
+    NetR3_1, Signal Layers Only, 119.148mils
+    NetR4_1, Signal Layers Only, 102.919mils
+    NetR5_1, Signal Layers Only, 71.37mils
+    NetR6_2, Signal Layers Only, 133.683mils
+    NetR7_1, Signal Layers Only, 171.834mils
+    NetR8_2, Signal Layers Only, 172.291mils
+    NetR9_1, Signal Layers Only, 130.368mils
+    RTS, Signal Layers Only, 534.359mils
+    SENSOR_VN, Signal Layers Only, 0mils
+    SENSOR_VP, Signal Layers Only, 0mils
+    USB-PWR-DM, Signal Layers Only, 439.912mils
+    USB-PWR-DP, Signal Layers Only, 583.612mils
+    VBUS, Signal Layers Only, 1104.447mils
+    VCC_3V3, Signal Layers Only, 1920.383mils
+count : 54

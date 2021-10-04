@@ -5,12 +5,13 @@
     "idf.customExtraVars": "{\"OPENOCD_SCRIPTS\":\"C:\\\\Users\\\\jiang\\\\.espressif\\\\tools\\\\openocd-esp32\\\\v0.10.0-esp32-20210401/openocd-esp32/share/openocd/scripts\",\"IDF_CCACHE_ENABLE\":\"1\"}",
     "idf.espIdfPathWin": "C:/Users/jiang/esp/esp-idf/",
     "idf.openOcdConfigs": "interface/ftdi/esp32_devkitj_v1.cfg,target/esp32.cfg",
-    "idf.portWin": "COM5",
+    "idf.portWin": "COM4",
     "idf.pythonBinPathWin": "C:/Users/jiang/.espressif/python_env/idf4.3_py3.8_env/Scripts/python.exe",
     "idf.toolsPathWin": "C:\\Users\\jiang\\.espressif",
     "files.associations": {
         "array": "c",
         "string": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "random": "c"
     }
 }

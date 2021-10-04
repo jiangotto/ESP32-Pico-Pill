@@ -1,0 +1,5 @@
+Remove Pin=U1-38 From Net=GPIO19
+Remove Pin=U1-39 From Net=GPIO22
+Remove Pin=U1-40 From Net=CP_Tx
+Remove Pin=U1-41 From Net=CP_Rx
+Remove Pin=U1-42 From Net=GPIO21
