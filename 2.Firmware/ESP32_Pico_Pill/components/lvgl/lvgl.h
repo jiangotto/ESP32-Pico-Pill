@@ -76,6 +76,8 @@ extern "C" {
 #include "src/porting/lv_port_fs.h"
 #include "src/porting/lv_port_indev.h"
 
+#include "src/app/lv_app.h"
+
 /*********************
  *      DEFINES
  *********************/
