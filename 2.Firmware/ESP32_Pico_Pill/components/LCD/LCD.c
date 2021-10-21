@@ -15,14 +15,14 @@ spi_bus_config_t buscfg={
 };
 //设置spi总线软件配置
 spi_device_interface_config_t devcfg={
-        .clock_speed_hz = SPI_MASTER_FREQ_40M,      // Clock out at 80 MHz,
+        .clock_speed_hz = SPI_MASTER_FREQ_40M,      // Clock out at 40 MHz,
         .mode = 0,                                  // SPI mode 0
         /*
         * The timing requirements to read the busy signal from the EEPROM cannot be easily emulated
         * by SPI transactions. We need to control CS pin by SW to check the busy signal manually.
         */
         .spics_io_num = PIN_NUM_CS,
-        .queue_size = 7,                            // 传输队列大小，决定了等待传输数据的数量
+        .queue_size = 128,                            // 传输队列大小，决定了等待传输数据的数量
         .pre_cb=lcd_spi_pre_transfer_callback,  //Specify pre-transfer callback to handle D/C line
         //.flags = SPI_DEVICE_TXBIT_LSBFIRST
 };
@@ -30,7 +30,7 @@ spi_device_interface_config_t devcfg={
 void SPI_init()
 {
     //Initialize the SPI bus
-    spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH2/*SPI_DMA_CH_AUTO*/);
+    spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO);
     spi_bus_add_device(SPI2_HOST, &devcfg, &spi);
     //Initialize the RES
     gpio_pad_select_gpio(PIN_NUM_RES);

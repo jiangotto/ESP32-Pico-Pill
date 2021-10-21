@@ -79,10 +79,10 @@ void lv_port_disp_init(void)
     /*A static or global variable to store the buffers*/
     static lv_disp_draw_buf_t disp_buf;
     /*Static or global buffer(s). The second buffer is optional*/
-    static lv_color_t buf_1[DISP_HOR_RES * DISP_VER_RES / 10];
-    static lv_color_t buf_2[DISP_HOR_RES * DISP_VER_RES / 10];
+    static lv_color_t buf_1[DISP_HOR_RES * DISP_VER_RES / 2];
+    static lv_color_t buf_2[DISP_HOR_RES * DISP_VER_RES / 2];
     /*Initialize `disp_buf` with the buffer(s). With only one buffer use NULL instead buf_2 */
-    lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, DISP_HOR_RES*DISP_VER_RES/10);
+    lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, DISP_HOR_RES*DISP_VER_RES/2);
 
     /*-----------------------------------
      * Register the display in LVGL
