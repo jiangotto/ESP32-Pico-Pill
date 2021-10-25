@@ -4,7 +4,7 @@ if(ESP_PLATFORM)
 
     idf_component_register(SRCS ${SOURCES}
                             INCLUDE_DIRS . src ../ 
-                            PRIV_REQUIRES LCD Button)
+                            REQUIRES LCD Button)
 
     target_compile_definitions(${COMPONENT_LIB} PUBLIC "-DLV_CONF_INCLUDE_SIMPLE")
 

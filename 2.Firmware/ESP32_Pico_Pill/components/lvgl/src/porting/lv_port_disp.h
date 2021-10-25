@@ -19,6 +19,8 @@ extern "C" {
  *********************/
 #include "../lvgl.h"
 #include "LCD.h"
+#include "esp_heap_caps.h"
+//#include "lvgl_helpers.h"
 
 extern lv_disp_t * disp;
 void lv_port_disp_init(void);

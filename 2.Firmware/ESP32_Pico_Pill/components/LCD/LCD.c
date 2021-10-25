@@ -2,6 +2,9 @@
 
 void lcd_spi_pre_transfer_callback(spi_transaction_t *t);
 
+static spi_transaction_t spi_t = {0};
+//memset(&spi_t, 0, sizeof(spi_t)); 
+
 //定义spi设备句柄
 spi_device_handle_t spi;
 //设置spi总线引脚配置
@@ -11,7 +14,7 @@ spi_bus_config_t buscfg={
         .sclk_io_num = PIN_NUM_CLK,                 // SCLK信号线
         .quadwp_io_num = -1,                        // WP信号线，专用于QSPI的D2
         .quadhd_io_num = -1,                        // HD信号线，专用于QSPI的D3
-        .max_transfer_sz = 172*320*8,                    // 最大传输数据大小
+        .max_transfer_sz = 172*320*16,                    // 最大传输数据大小
 };
 //设置spi总线软件配置
 spi_device_interface_config_t devcfg={
@@ -51,14 +54,12 @@ void lcd_spi_pre_transfer_callback(spi_transaction_t *t)
 
 esp_err_t SPI_write_reg(uint8_t data)
 {
-    esp_err_t ret;
-    spi_transaction_t t;
-    memset(&t, 0, sizeof(t));       
+    esp_err_t ret;     
 
-    t.length = 1*8;                 //Len is in bytes, transaction length is in bits.
-    t.tx_buffer = &data;               //Data
-    t.user=(void*)0;                //D/C needs to be set to 0
-    ret = spi_device_polling_transmit(spi, &t);  //Transmit!
+    spi_t.length = 1*8;                 //Len is in bytes, transaction length is in bits.
+    spi_t.tx_buffer = &data;               //Data
+    spi_t.user=(void*)0;                //D/C needs to be set to 0
+    ret = spi_device_polling_transmit(spi, &spi_t);  //Transmit!
 
     return ret;
 }
@@ -66,13 +67,11 @@ esp_err_t SPI_write_reg(uint8_t data)
 esp_err_t SPI_write_data8(uint8_t data)
 {
     esp_err_t ret;
-    spi_transaction_t t;
-    memset(&t, 0, sizeof(t));       //Zero out the transaction
 
-    t.length = 1*8;                 //Len is in bytes, transaction length is in bits.
-    t.tx_buffer = &data;               //Data
-    t.user=(void*)1;                //D/C needs to be set to 1
-    ret = spi_device_polling_transmit(spi, &t);  //Transmit!
+    spi_t.length = 1*8;                 //Len is in bytes, transaction length is in bits.
+    spi_t.tx_buffer = &data;               //Data
+    spi_t.user=(void*)1;                //D/C needs to be set to 1
+    ret = spi_device_polling_transmit(spi, &spi_t);  //Transmit!
 
     return ret;
 }
@@ -80,28 +79,48 @@ esp_err_t SPI_write_data8(uint8_t data)
 esp_err_t SPI_write_data16(uint16_t data)
 {
     esp_err_t ret;
-    uint16_t rev_data = (data>>8) + (data<<8);
+    uint16_t rev_data = (data>>8) + (data<<8);  
 
-    spi_transaction_t t;
-    memset(&t, 0, sizeof(t));       
+    spi_t.length = 2*8;                 //Len is in bytes, transaction length is in bits.
+    spi_t.tx_buffer = &rev_data;               //Data
+    spi_t.user=(void*)1;                //D/C needs to be set to 1
+    ret = spi_device_polling_transmit(spi, &spi_t);  //Transmit!
 
-    t.length = 2*8;                 //Len is in bytes, transaction length is in bits.
-    t.tx_buffer = &rev_data;               //Data
-    t.user=(void*)1;                //D/C needs to be set to 1
-    ret = spi_device_polling_transmit(spi, &t);  //Transmit!
+    return ret;
+}
+
+esp_err_t SPI_write_dataN(uint16_t *data, uint16_t n)
+{
+    esp_err_t ret;      
+
+    spi_t.length = n*2*8;                 //Len is in bytes, transaction length is in bits.
+    spi_t.tx_buffer = data;               //Data
+    spi_t.user=(void*)1;                //D/C needs to be set to 1
+    ret = spi_device_polling_transmit(spi, &spi_t);  //Transmit!
 
     return ret;
 }
 
 void LCD_set_add(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 {
+    uint16_t *data;
+    data = (uint16_t *)malloc(2*sizeof(uint16_t));
+
     SPI_write_reg(0x2a);
-    SPI_write_data16(x1+34);
-    SPI_write_data16(x2+34);
+
+    data[0] = ((x1+34)>>8) + ((x1+34)<<8);
+    data[1] = ((x2+34)>>8) + ((x2+34)<<8);
+    SPI_write_dataN(data, 2);
+
     SPI_write_reg(0x2b);
-    SPI_write_data16(y1);
-    SPI_write_data16(y2);
+
+    data[0] = (y1>>8) + (y1<<8);
+    data[1] = (y2>>8) + (y2<<8);
+    SPI_write_dataN(data, 2);
+
     SPI_write_reg(0x2c);
+
+    free(data);
 }
 
 void LCD_fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, uint16_t color)
@@ -126,15 +145,12 @@ void LCD_draw_point(uint16_t x,uint16_t y,uint16_t color)
 /*已优化显示部分的代码，可以快速刷新屏幕*/
 void LCD_lvgl_cb(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2, uint16_t *color, unsigned int size)
 {
-    LCD_set_add(x1, y1, x2, y2);
+    LCD_set_add(x1, y1, x2, y2);      
 
-    spi_transaction_t t;
-    memset(&t, 0, sizeof(t));       
-
-    t.length = size*2*8;                 //Len is in bytes, transaction length is in bits.
-    t.tx_buffer = color;               //Data
-    t.user=(void*)1;                //D/C needs to be set to 1
-    spi_device_polling_transmit(spi, &t);  //Transmit!
+    spi_t.length = size*2*8;                 //Len is in bytes, transaction length is in bits.
+    spi_t.tx_buffer = color;               //Data
+    spi_t.user=(void*)1;                //D/C needs to be set to 1
+    spi_device_polling_transmit(spi, &spi_t);  //Transmit!
 }
 
 void LCD_init()
@@ -227,6 +243,4 @@ void LCD_init()
     SPI_write_reg(0x11);
     vTaskDelay(120);	
 	SPI_write_reg(0x29); 
-
-    //LCD_fill(0, 0, LCD_W, LCD_H, WHITE);
 }
